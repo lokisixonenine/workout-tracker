@@ -6,7 +6,7 @@ const logger = require('morgan');
 // initialize PORT
 const PORT = process.env.PORT || 3000;
 
-// set up and call dependencies
+// set up express and mongoDB
 const app = express();
 
 app.use(logger("dev"));
@@ -15,6 +15,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+
 app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
@@ -26,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
 app.use(require("./routes/api.js"));
 app.use(require("./routes/html.js"));
 
-// port listener
+// PORT listener
 app.listen(PORT, () => {
-    console.log(`Go workout! App is now running on port ${PORT}!`);
+    console.log(`App running on port ${PORT}!`);
 });
