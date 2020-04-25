@@ -4,22 +4,25 @@ const Schema = mongoose.Schema;
 const userLogSchema = new Schema({
 
     day: {
-                type: Date,
-                default: Date.now()
+            type: Date,
+            default: () => new Date()
     },
         exercises: [{
         type: {
             type: String,
-            trim: true
+            trim: true,
+            required: true
             },
 
         name: {
             type: String,                
-            trim: true
+            trim: true,
+            required: true
             },
 
         duration: {
-            type: Number
+            type: Number,
+            required: true
             },
 
         reps: {
