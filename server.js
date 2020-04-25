@@ -1,13 +1,11 @@
-// add dependencies
-require('dotenv').config();
+require('dotenv').config()
 const express = require("express");
 const logger = require("morgan");
-const mongojos = require("mongojs");
+const mongojs = require('mongojs')
 const mongoose = require("mongoose");
-const path = require("path");
+const path = require('path')
 
-// add port for localhost
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 const User = require("./models/models");
 const app = express();
@@ -17,27 +15,28 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+
 app.use(express.static("public"));
 
-// initialize noSQL DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
     useNewUrlParser: true
 });
 
-// add file routes to get parts of data
+
+// file routes
 app.get("/", (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+})
 
 app.get("/exercise", (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'exercise.html'));
-});
+})
 
-app.get("/stat", (_req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'stats.html'));
-});
+//app.get('/stats', (_req, res) => {
+    //res.sendFile(path.join(__dirname, 'public', 'stats.html'))
+//})
 
-// add workout api
+// api/workouts
 app.get("/api/workouts", (_, res) => {
     User.find()
         .then(result => {
@@ -58,13 +57,13 @@ app.post("/api/workouts", (_, res) => {
         });
 });
 
-app.put("/api/workouts/:id", ({
+app.post("/api/workouts/:id", ({
     body,
     params
 }, res) => {
-    User.findByID(params.id, {
+    User.findByIdAndUpdate(params.id, {
             $push: {
-                exercise: body
+                exercises: body
             }
         }, {
             new: true,
@@ -78,17 +77,18 @@ app.put("/api/workouts/:id", ({
         });
 });
 
-app.get("/api/workouts/range", (_, res) => {
+// api/workouts/range 
+app.get('/api/workouts/range', (_, res) => {
     User.find()
-    .then(result => {
-        res.json(result);
-    })
-    .catch(err => {
-        res.json(err);
-    });
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            res.json(err);
+        });
 });
 
-// localhost port listen
+
 app.listen(PORT, () => {
-    console.log(`App is running on port ${PORT} yo! Git yer workout done son!`);
+    console.log(`App running on port ${PORT}!`);
 });
