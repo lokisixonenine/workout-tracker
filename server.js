@@ -32,10 +32,6 @@ app.get("/exercise", (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'exercise.html'));
 })
 
-//app.get('/stats', (_req, res) => {
-    //res.sendFile(path.join(__dirname, 'public', 'stats.html'))
-//})
-
 // api/workouts
 app.get("/api/workouts", (_, res) => {
     User.find()
