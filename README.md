@@ -19,4 +19,5 @@ This app should meet the following criteria:
 * Open a browser and navigate to localhost 3000.
 
 The app should look this this:
+
 ![](fitnesstracker.png)
