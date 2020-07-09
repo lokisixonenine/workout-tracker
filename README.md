@@ -13,3 +13,10 @@ This app should meet the following criteria:
 * App should be able to add exercises to a previous workout plan.
 * App should be able to add new exercises to a new workout plan.
 * User should be able to view combined weight of multiple exercises on a 'stats' page.
+
+## Running the App:
+* Fork this repo and from terminal, run 'npm start'
+* Open a browser and navigate to localhost 3000.
+
+The app should look this this:
+![](fitnesstracker.png)
