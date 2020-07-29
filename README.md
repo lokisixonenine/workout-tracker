@@ -21,3 +21,7 @@ This app should meet the following criteria:
 The app should look this this:
 
 ![](fitnesstracker.png)
+
+## Deployed App
+This app is deployed at:
+https://jaycee-crossfit-tracker.herokuapp.com/ 
